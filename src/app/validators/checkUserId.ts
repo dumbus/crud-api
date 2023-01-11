@@ -20,6 +20,8 @@ const checkUserId = (userId: string) => {
     }
 
     return {
+        code: StatusCodes.ok,
+        message: ErrorMessages.ok,
         validationSuccess: true
     }
 };
