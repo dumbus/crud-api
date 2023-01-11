@@ -1,7 +1,7 @@
-import { IncomingMessage, ServerResponse } from 'node:http';
-import { StatusCodes, ErrorMessages, IUser } from './types';
+import { IncomingMessage } from 'node:http';
+import { StatusCodes, ErrorMessages, IValidatorResult } from './types';
 
-const getBody = (req: IncomingMessage, res: ServerResponse) => {
+const getBody = (req: IncomingMessage): Promise<IValidatorResult> => {
     return new Promise((resolve) => {
         let body = '';
 
