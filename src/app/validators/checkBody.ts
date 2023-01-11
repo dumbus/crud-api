@@ -23,6 +23,8 @@ const checkBody = (body: IUser) => {
         }
 
         return {
+            code: StatusCodes.ok,
+            message: ErrorMessages.ok,
             validationSuccess: true
         }
     } catch {

@@ -20,10 +20,16 @@ const enum ErrorMessages {
 }
 
 interface IUser {
-    id?: string,
+    id: string,
     username: string,
     age: number,
     hobbies: string[];
 }
 
-export { StatusCodes, ErrorMessages, IUser };
+interface IUserProperties {
+    username: string,
+    age: number,
+    hobbies: string[];
+}
+
+export { StatusCodes, ErrorMessages, IUser, IUserProperties };

@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
-import { StatusCodes, ErrorMessages } from './types';
+import { StatusCodes, ErrorMessages, IUser } from './types';
 
 const getBody = (req: IncomingMessage, res: ServerResponse) => {
     return new Promise((resolve) => {

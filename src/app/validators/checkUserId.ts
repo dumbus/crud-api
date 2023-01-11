@@ -1,5 +1,5 @@
 import { validate as validateUuid } from 'uuid';
-import * as database from '../database.json';
+import * as database from '../database/database.json';
 import { StatusCodes, ErrorMessages } from '../utils/types';
 
 const checkUserId = (userId: string) => {
