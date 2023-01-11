@@ -1,11 +1,11 @@
-import { IncomingMessage, ServerResponse } from 'node:http';
+import { ServerResponse } from 'node:http';
 import { StatusCodes, ErrorMessages, IUser } from '../utils/types';
 import { checkUserId } from '../validators/checkUserId';
-import * as database from '../database.json';
+import { databaseController } from '../database/databaseController';
 
 const getAllUsers = (res: ServerResponse) => {
     try {
-        const allUsers = database;
+        const allUsers = databaseController.getAllUsers();
 
         res.writeHead(StatusCodes.ok, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(allUsers));
@@ -20,7 +20,7 @@ const getUser = (res: ServerResponse, userId: string) => {
         const { code, message, validationSuccess } = checkUserId(userId);
 
         if (validationSuccess) {
-            const user = database.find((user: IUser) => user.id === userId);
+            const user = databaseController.getUser(userId);
 
             res.writeHead(code, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(user));
@@ -34,4 +34,4 @@ const getUser = (res: ServerResponse, userId: string) => {
     }
 };
 
-export {  };
+export { getAllUsers, getUser };
