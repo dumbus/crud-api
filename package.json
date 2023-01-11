@@ -1,0 +1,28 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dumbus/crud-api.git"
+  },
+  "author": "dumbus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dumbus/crud-api/issues"
+  },
+  "homepage": "https://github.com/dumbus/crud-api#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "uuid": "^9.0.0"
+  }
+}
