@@ -1,5 +1,5 @@
 import { ServerResponse } from 'node:http';
-import { StatusCodes, ErrorMessages, IUser } from '../utils/types';
+import { StatusCodes, ErrorMessages } from '../utils/types';
 import { checkUserId } from '../validators/checkUserId';
 import { databaseController } from '../database/databaseController';
 
