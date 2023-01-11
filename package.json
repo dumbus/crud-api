@@ -20,6 +20,7 @@
   "homepage": "https://github.com/dumbus/crud-api#readme",
   "devDependencies": {
     "@types/node": "^18.11.18",
+    "@types/uuid": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
     "eslint": "^8.31.0",
