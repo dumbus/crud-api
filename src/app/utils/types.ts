@@ -32,11 +32,4 @@ interface IUserProperties {
     hobbies: string[];
 }
 
-interface IValidatorResult {
-    parsedBody?: IUserProperties,
-    code?: number,
-    message?: string,
-    validationSuccess: boolean
-}
-
-export { StatusCodes, ErrorMessages, IUser, IUserProperties, IValidatorResult };
+export { StatusCodes, ErrorMessages, IUser, IUserProperties };

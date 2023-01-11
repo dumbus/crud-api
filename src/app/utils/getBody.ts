@@ -1,7 +1,7 @@
 import { IncomingMessage } from 'node:http';
-import { StatusCodes, ErrorMessages, IValidatorResult } from './types';
+import { IUserProperties } from './types';
 
-const getBody = (req: IncomingMessage): Promise<IValidatorResult> => {
+const getBody = (req: IncomingMessage): Promise<IUserProperties | null> => {
     return new Promise((resolve) => {
         let body = '';
 
@@ -12,17 +12,9 @@ const getBody = (req: IncomingMessage): Promise<IValidatorResult> => {
         req.on('end', () => {
             try {
                 const parsedBody = JSON.parse(body);
-                const result = {
-                    parsedBody,
-                    validationSuccess: true
-                }
-                resolve(result);
+                resolve(parsedBody);
             } catch {
-                resolve({
-                    code: StatusCodes.badRequest,
-                    message: ErrorMessages.invalidBody,
-                    validationSuccess: false
-                });
+                resolve(null);
             }
         });
     });

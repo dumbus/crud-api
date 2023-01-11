@@ -1,6 +1,6 @@
-import { StatusCodes, ErrorMessages, IUser } from '../utils/types';
+import { StatusCodes, ErrorMessages, IUserProperties } from '../utils/types';
 
-const checkBody = (body: IUser) => {
+const checkBody = (body: IUserProperties, checkFor: "POST" | "PUT") => {
     const { username, age, hobbies } = body;
 
     try {
@@ -22,8 +22,10 @@ const checkBody = (body: IUser) => {
             }
         }
 
+        const code = checkFor === "POST" ? StatusCodes.created : StatusCodes.ok;
+
         return {
-            code: StatusCodes.ok,
+            code,
             message: ErrorMessages.ok,
             validationSuccess: true
         }
