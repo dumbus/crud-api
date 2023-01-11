@@ -8,15 +8,15 @@ const enum StatusCodes {
 }
 
 const enum ErrorMessages {
-    ok = 'success',
-    created = 'user was created successfully',
-    deleted = 'user was deleted successfully',
-    invalidId = 'user id is invalid',
-    invalidRequest = 'request is invalid',
-    invalidBody = 'request body is invalid',
+    ok = 'Success',
+    created = 'User was created successfully',
+    deleted = 'User was deleted successfully',
+    invalidId = 'User id is invalid',
+    invalidRequest = 'Request has wrong endpoint',
+    invalidBody = 'Body of request has wrong format',
     invalidRequiredFields = 'Something is wrong with required fields',
-    notFound = 'user doesn\'t exist',
-    internalServerError = 'internal server error',
+    notFound = 'User doesn\'t exist',
+    internalServerError = 'Internal server error',
 }
 
 interface IUser {
