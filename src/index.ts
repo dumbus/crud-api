@@ -1,4 +1,3 @@
-import * as dotenv from 'dotenv';
+import { startServer } from "./app/server";
 
-dotenv.config();
-console.log(process.env);
+startServer();
