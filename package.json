@@ -30,12 +30,5 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "uuid": "^9.0.0"
-  },
-  "nodemonConfig": {
-    "watch": [
-      "src"
-    ],
-    "ext": "ts",
-    "exec": "ts-node ./src/index.ts"
   }
 }
