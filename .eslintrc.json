@@ -18,6 +18,8 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": { 
-        "no-console": 1
+        "no-console": 1,
+        "indent": ["warn", 4],
+        "eol-last": ["warn", "always"]
     }
 }
