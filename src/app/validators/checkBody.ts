@@ -1,4 +1,4 @@
-import { StatusCodes, ErrorMessages, IUser } from '../types';
+import { StatusCodes, ErrorMessages, IUser } from '../utils/types';
 
 const checkBody = (body: IUser) => {
     const { username, age, hobbies } = body;

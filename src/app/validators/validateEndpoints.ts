@@ -1,4 +1,4 @@
-import { StatusCodes, ErrorMessages } from '../types';
+import { StatusCodes, ErrorMessages } from '../utils/types';
 import { checkUserId } from './checkUserId';
 
 const validateEndpoints = (url: string, method: string) => {
