@@ -1,28 +1,21 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
+
 import { getBody } from '../utils/getBody';
-import { checkBody } from '../validators/checkBody';
+import { validateBody } from '../validators/validateBody';
 import { databaseController } from '../database/databaseController';
 import { StatusCodes, ErrorMessages } from '../utils/types';
 
 const postOperation = async (req: IncomingMessage, res: ServerResponse) => {
     try {
-        const body = await getBody(req);
+        const body = await getBody(req, res);
 
-        if (body) {
-            const { code, message, validationSuccess } = checkBody(body, "POST");
+        const isBodyValid = validateBody(body, res);
 
-            if (validationSuccess) {
-                const newUser = databaseController.createUser(body);
+        if (isBodyValid) {
+            const newUser = databaseController.createUser(body);
 
-                res.writeHead(code, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify(newUser));
-            } else {
-                res.writeHead(code, { 'Content-Type': 'application/json' });
-                res.end(message);
-            }
-        } else {
-            res.writeHead(StatusCodes.badRequest, { 'Content-Type': 'application/json' });
-            res.end(ErrorMessages.invalidBody);
+            res.writeHead(StatusCodes.created, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(newUser));
         }
     } catch {
         res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });

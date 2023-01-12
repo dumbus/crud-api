@@ -1,7 +1,8 @@
 import { ServerResponse } from 'node:http';
-import { StatusCodes, ErrorMessages } from '../utils/types';
-import { checkUserId } from '../validators/checkUserId';
+
+import { validateUserId } from '../validators/validateUserId';
 import { databaseController } from '../database/databaseController';
+import { StatusCodes, ErrorMessages } from '../utils/types';
 
 const getAllUsers = (res: ServerResponse) => {
     try {
@@ -15,18 +16,15 @@ const getAllUsers = (res: ServerResponse) => {
     }
 };
 
-const getUser = (res: ServerResponse, userId: string) => {
+const getUser = (userId: string, res: ServerResponse) => {
     try {
-        const { code, message, validationSuccess } = checkUserId(userId);
+        const isUserIdValid = validateUserId(userId, res);
 
-        if (validationSuccess) {
+        if (isUserIdValid) {
             const user = databaseController.getUser(userId);
 
-            res.writeHead(code, { 'Content-Type': 'application/json' });
+            res.writeHead(StatusCodes.ok, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(user));
-        } else {
-            res.writeHead(code, { 'Content-Type': 'application/json' });
-            res.end(message);
         }
     } catch {
         res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });

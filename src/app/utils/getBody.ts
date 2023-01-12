@@ -1,7 +1,8 @@
-import { IncomingMessage } from 'node:http';
-import { IUserProperties } from './types';
+import { IncomingMessage, ServerResponse } from 'node:http';
 
-const getBody = (req: IncomingMessage): Promise<IUserProperties | null> => {
+import { StatusCodes, ErrorMessages, IUserProperties } from './types';
+
+const getBody = (req: IncomingMessage, res: ServerResponse): Promise<IUserProperties> => {
     return new Promise((resolve) => {
         let body = '';
 
@@ -14,7 +15,8 @@ const getBody = (req: IncomingMessage): Promise<IUserProperties | null> => {
                 const parsedBody = JSON.parse(body);
                 resolve(parsedBody);
             } catch {
-                resolve(null);
+                res.writeHead(StatusCodes.badRequest, { 'Content-Type': 'application/json' });
+                res.end(ErrorMessages.invalidBody);
             }
         });
     });

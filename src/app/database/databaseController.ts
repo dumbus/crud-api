@@ -27,11 +27,9 @@ const databaseController = {
         return updatedUser;
     },
 
-    deleteUser(userId: string): IUser {
+    deleteUser(userId: string): void {
         const indexOfUser = database.findIndex(user => user.id === userId);
-        const [deletedUser] = database.splice(indexOfUser, 1);
-
-        return deletedUser;
+        database.splice(indexOfUser, 1);
     }
 };
 
