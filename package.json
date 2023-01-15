@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start:dev": "nodemon",
+    "start:prod": "tsc && node ./dist/index.js",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
