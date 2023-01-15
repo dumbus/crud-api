@@ -7,7 +7,7 @@ const getBody = (req: IncomingMessage, res: ServerResponse): Promise<IUserProper
         let body = '';
 
         req.on('data', chunk => {
-            body += chunk.toSting();
+            body += chunk.toString();
         });
 
         req.on('end', () => {

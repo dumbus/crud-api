@@ -66,7 +66,7 @@ const apiController = {
                     const updatedUser = databaseController.updateUser(userId, body);
     
                     res.writeHead(StatusCodes.ok, { 'Content-Type': 'application/json' });
-                    res.end(updatedUser);
+                    res.end(JSON.stringify(updatedUser));
                 }
             }
         } catch {
@@ -83,7 +83,7 @@ const apiController = {
                 databaseController.deleteUser(userId);
                 
                 res.writeHead(StatusCodes.deleted, { 'Content-Type': 'application/json' });
-                res.end(ErrorMessages.deleted);
+                res.end(); // no message because code 204 do not return anything
             }
         } catch {
             res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });

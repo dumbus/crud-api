@@ -6,7 +6,7 @@ import { StatusCodes, ErrorMessages } from './utils/types';
 const requestListener = (req: IncomingMessage, res: ServerResponse) => {
     try {
         const { url, method } = req;
-        const [api, users, id, ...rest] = url;
+        const [api, users, id, ...rest] = url.split('/').filter(Boolean);
 
         if (api === 'api' && users === 'users' && rest.length === 0) {
             switch (method) {
