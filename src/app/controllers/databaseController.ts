@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
 import { IUser, IUserProperties } from '../utils/types';
-import * as database from './database.json';
+
+export const database = [];
 
 const databaseController = {
     getAllUsers(): IUser[] {

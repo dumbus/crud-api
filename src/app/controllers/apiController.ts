@@ -1,10 +1,10 @@
 import { IncomingMessage ,ServerResponse } from 'node:http';
 
-import { getBody } from './getBody';
+import { getBody } from '../utils/getBody';
 import { validateBody } from '../validators/validateBody';
 import { validateUserId } from '../validators/validateUserId';
-import { databaseController } from '../database/databaseController';
-import { StatusCodes, ErrorMessages } from './messages';
+import { databaseController } from './databaseController';
+import { StatusCodes, ErrorMessages } from '../utils/messages';
 
 const apiController = {
     getAllUsersOperation(res: ServerResponse) {

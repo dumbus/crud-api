@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
 
-import { apiController } from './utils/apiController';
+import { apiController } from './controllers/apiController';
 import { StatusCodes, ErrorMessages } from './utils/messages';
 
 const requestListener = (req: IncomingMessage, res: ServerResponse) => {
