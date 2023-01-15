@@ -7,7 +7,7 @@ import { databaseController } from '../database/databaseController';
 import { StatusCodes, ErrorMessages } from './types';
 
 const apiController = {
-    getAllUsers(res: ServerResponse) {
+    getAllUsersOperation(res: ServerResponse) {
         try {
             const allUsers = databaseController.getAllUsers();
     
@@ -53,7 +53,7 @@ const apiController = {
         }
     },
 
-    async updateOperation(userId: string, req: IncomingMessage, res: ServerResponse) {
+    async putOperation(userId: string, req: IncomingMessage, res: ServerResponse) {
         try {
             const isUserIdValid = validateUserId(userId, res);
     
