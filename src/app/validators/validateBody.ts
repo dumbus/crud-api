@@ -1,6 +1,7 @@
 import { ServerResponse } from 'node:http';
 
-import { StatusCodes, ErrorMessages, IUserProperties } from '../utils/types';
+import { IUserProperties } from '../utils/types';
+import { StatusCodes, ErrorMessages } from '../utils/messages';
 
 const validateBody = (body: IUserProperties, res: ServerResponse) => {
     const { username, age, hobbies } = body;

@@ -1,7 +1,7 @@
 import { ServerResponse } from 'node:http';
 import { validate as validateUuid } from 'uuid';
 
-import { StatusCodes, ErrorMessages } from '../utils/types';
+import { StatusCodes, ErrorMessages } from '../utils/messages';
 import * as database from '../database/database.json';
 
 const validateUserId = (userId: string, res: ServerResponse) => {

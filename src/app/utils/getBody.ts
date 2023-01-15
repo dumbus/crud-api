@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
 
-import { StatusCodes, ErrorMessages, IUserProperties } from './types';
+import { IUserProperties } from './types';
+import { StatusCodes, ErrorMessages } from './messages';
 
 const getBody = (req: IncomingMessage, res: ServerResponse): Promise<IUserProperties> => {
     return new Promise((resolve) => {

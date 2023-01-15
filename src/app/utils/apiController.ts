@@ -4,7 +4,7 @@ import { getBody } from './getBody';
 import { validateBody } from '../validators/validateBody';
 import { validateUserId } from '../validators/validateUserId';
 import { databaseController } from '../database/databaseController';
-import { StatusCodes, ErrorMessages } from './types';
+import { StatusCodes, ErrorMessages } from './messages';
 
 const apiController = {
     getAllUsersOperation(res: ServerResponse) {
