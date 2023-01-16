@@ -1,9 +1,9 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
 
-import { IUserProperties } from './types';
+import { IUser } from './types';
 import { StatusCodes, ErrorMessages } from './messages';
 
-const getBody = (req: IncomingMessage, res: ServerResponse): Promise<IUserProperties> => {
+const getBody = (req: IncomingMessage, res: ServerResponse): Promise<IUser> => {
     return new Promise((resolve) => {
         let body = '';
 

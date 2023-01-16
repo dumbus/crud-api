@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { IUser, IUserProperties } from '../utils/types';
+import { IUser } from '../utils/types';
 
 export const database = [];
 
@@ -12,7 +12,7 @@ const databaseController = {
         return database.find((user: IUser) => user.id === userId);
     },
 
-    createUser(userProperties: IUserProperties): IUser {
+    createUser(userProperties: IUser): IUser {
         const { username, age, hobbies } = userProperties;
         const uuid = v4();
         const newUser = { id: uuid, username, age, hobbies };
@@ -21,7 +21,7 @@ const databaseController = {
         return newUser;
     },
 
-    updateUser(userId: string, userProperties: IUserProperties): IUser {
+    updateUser(userId: string, userProperties: IUser): IUser {
         const { username, age, hobbies } = userProperties;
         const indexOfUser = database.findIndex(user => user.id === userId);
         const updatedUser = { id: userId, username, age, hobbies };

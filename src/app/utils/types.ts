@@ -5,10 +5,9 @@ interface IUser {
     hobbies: string[];
 }
 
-interface IUserProperties {
-    username: string,
-    age: number,
-    hobbies: string[];
+interface IError {
+    code: number;
+    message: string;
 }
 
-export { IUser, IUserProperties };
+export { IUser, IError };
