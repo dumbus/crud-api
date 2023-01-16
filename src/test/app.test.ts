@@ -61,62 +61,118 @@ describe('First test scenario: default operations', () => {
         expect(serverResponse.statusCode).toEqual(404);
         expect(serverResponse.body.message).toEqual(ErrorMessages.notFound);
     });
+});
 
-    describe('Second test scenario: unexpected user formats', () => {
-        const mockUserWithWrongHobbiesFormat = {
-            username: 'mockUser',
-            age: 0,
-            hobbies: [1234]
-        };
+describe('Second test scenario: unexpected user formats', () => {
+    const mockUserWithWrongHobbiesFormat = {
+        username: 'mockUser',
+        age: 0,
+        hobbies: [1234]
+    };
 
-        const mockUserWithWrongAgeFormat = {
-            username: 'mockUser',
-            age: '',
-            hobbies: ['hobbie']
-        };
+    const mockUserWithWrongAgeFormat = {
+        username: 'mockUser',
+        age: '',
+        hobbies: ['hobbie']
+    };
 
-        const mockUserWithAdditionalFields = {
-            username: 'mockUser',
-            age: '',
-            hobbies: ['hobbie'],
-            additional: 'additional'
-        };
+    const mockUserWithAdditionalFields = {
+        username: 'mockUser',
+        age: '',
+        hobbies: ['hobbie'],
+        additional: 'additional'
+    };
 
-        const mockUserEmpty = { };
+    const mockUserEmpty = { };
 
-        it('POST: try to add user with wrong HOBBIES format (expected wrong body format error)', async () => {
-            const serverResponse = await supertest(server).post(baseUrl).send(mockUserWithWrongHobbiesFormat);
+    it('POST: try to add user with wrong HOBBIES format (expected wrong body format error)', async () => {
+        const serverResponse = await supertest(server).post(baseUrl).send(mockUserWithWrongHobbiesFormat);
 
-            expect(serverResponse.statusCode).toEqual(400);
-            expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
-        });
+        expect(serverResponse.statusCode).toEqual(400);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
+    });
 
-        it('POST: try to add user with wrong AGE format (expected wrong body format error)', async () => {
-            const serverResponse = await supertest(server).post(baseUrl).send(mockUserWithWrongAgeFormat);
+    it('POST: try to add user with wrong AGE format (expected wrong body format error)', async () => {
+        const serverResponse = await supertest(server).post(baseUrl).send(mockUserWithWrongAgeFormat);
 
-            expect(serverResponse.statusCode).toEqual(400);
-            expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
-        });
+        expect(serverResponse.statusCode).toEqual(400);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
+    });
 
-        it('POST: try to add user with ADDITIONAL FIELDS (expected wrong body format error)', async () => {
-            const serverResponse = await supertest(server).post(baseUrl).send(mockUserWithAdditionalFields);
+    it('POST: try to add user with ADDITIONAL FIELDS (expected wrong body format error)', async () => {
+        const serverResponse = await supertest(server).post(baseUrl).send(mockUserWithAdditionalFields);
 
-            expect(serverResponse.statusCode).toEqual(400);
-            expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
-        });
+        expect(serverResponse.statusCode).toEqual(400);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
+    });
 
-        it('POST: try to add an EMPTY user (expected wrong body format error)', async () => {
-            const serverResponse = await supertest(server).post(baseUrl).send(mockUserEmpty);
+    it('POST: try to add an EMPTY user (expected wrong body format error)', async () => {
+        const serverResponse = await supertest(server).post(baseUrl).send(mockUserEmpty);
 
-            expect(serverResponse.statusCode).toEqual(400);
-            expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
-        });
+        expect(serverResponse.statusCode).toEqual(400);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
+    });
 
-        it('GET: get all users (an empty array is expected)', async () => {
-            const serverResponse = await supertest(server).get(baseUrl);
-    
-            expect(serverResponse.statusCode).toEqual(200);
-            expect(serverResponse.body).toEqual([]);
-        });
+    it('GET: get all users (an empty array is expected)', async () => {
+        const serverResponse = await supertest(server).get(baseUrl);
+
+        expect(serverResponse.statusCode).toEqual(200);
+        expect(serverResponse.body).toEqual([]);
+    });
+});
+
+describe('Third test scenario: test errors (codes and messages)', () => {
+    const wrongEndpoint = '/wrong/endpoint';
+    const invalidUuid = 'not-a-uuid';
+    const notExistingUuid = '00000000-0000-0000-0000-000000000000';
+    const invalidBody = 'not a JSON';
+
+    it('GET: request with wrong endpoint (expected code 404 and wrong endpoint message)', async () => {
+        const serverResponse = await supertest(server).get(wrongEndpoint);
+
+        expect(serverResponse.statusCode).toEqual(404);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequest);
+    });
+
+    it('GET: request with invalid uuid (expected code 400 and invalid uuid message)', async () => {
+        const serverResponse = await supertest(server).get(`${baseUrl}/${invalidUuid}`);
+
+        expect(serverResponse.statusCode).toEqual(400);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.invalidId);
+    });
+
+    it('GET: request with not existing uuid (expected code 404 and not found message)', async () => {
+        const serverResponse = await supertest(server).get(`${baseUrl}/${notExistingUuid}`);
+
+        expect(serverResponse.statusCode).toEqual(404);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.notFound);
+    });
+
+    it('DELETE: request with invalid uuid (expected code 400 and invalid uuid message)', async () => {
+        const serverResponse = await supertest(server).delete(`${baseUrl}/${invalidUuid}`);
+
+        expect(serverResponse.statusCode).toEqual(400);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.invalidId);
+    });
+
+    it('DELETE: request with not existing uuid (expected code 404 and not found message)', async () => {
+        const serverResponse = await supertest(server).delete(`${baseUrl}/${notExistingUuid}`);
+
+        expect(serverResponse.statusCode).toEqual(404);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.notFound);
+    });
+
+    it('POST: request with wrong body format (expected code 400 and invalid body format message)', async () => {
+        const serverResponse = await supertest(server).post(baseUrl).send(invalidBody);
+
+        expect(serverResponse.statusCode).toEqual(400);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.invalidBody);
+    });
+
+    it('GET: get all users (an empty array is expected)', async () => {
+        const serverResponse = await supertest(server).get(baseUrl);
+
+        expect(serverResponse.statusCode).toEqual(200);
+        expect(serverResponse.body).toEqual([]);
     });
 });
