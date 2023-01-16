@@ -27,7 +27,7 @@ Run the application in a production mode:
 ```
 npm run start:prod
 ```
-Run the application in a cluster mode
+Run the application in a cluster mode:
 ```
 npm run start:multi
 ```
