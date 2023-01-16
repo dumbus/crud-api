@@ -19,11 +19,15 @@ npm install
 
 ## How to run application:
 
-Run in a development mode:
+Run the application in a development mode:
 ```
 npm run start:dev
 ```
-Run in a production mode:
+Run the application in a production mode:
+```
+npm run start:prod
+```
+Run the application in a cluster mode
 ```
 npm run start:prod
 ```
@@ -47,3 +51,14 @@ Implemented endpoint: `api/users`
 `username` — user's name (string, **required**)  
 `age` — user's age (number, **required**)  
 `hobbies` — user's hobbies (array of strings or empty array, **required**)  
+
+## Important notes:
+> When you start cluster mode, please, wait until all workers start, they will print messages to console
+```
+Worker ${worker pid} is running on port ${worker port}  
+```
+
+> Also in cluster mode you can see, how load-balancer works:
+```
+Request was sent from load-balancer to worker ${worker pid}, port: ${worker port} 
+```
