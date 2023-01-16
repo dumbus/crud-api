@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "nodemon",
     "start:prod": "tsc && node ./dist/index.js",
+    "start:multi": "nodemon --multi",
     "lint": "eslint . --ext .ts",
     "test": "jest"
   },
