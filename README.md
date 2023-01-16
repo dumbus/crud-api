@@ -8,11 +8,15 @@ Assignment: https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignm
 ```
 git clone ${link to repository}
 ```
-### 2. Change repository branch:
+### 2. Change active directory:
+```
+cd crud-api
+```
+### 3. Change repository branch:
 ```
 git checkout crud-api
 ```
-### 3. Install dependencies:
+### 4. Install dependencies:
 ```
 npm install
 ```
