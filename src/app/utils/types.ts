@@ -10,4 +10,14 @@ interface IError {
     message: string;
 }
 
-export { IUser, IError };
+interface IValidationResult {
+    isValid: boolean;
+    code: number;
+    body: IUser | IError | null;
+}
+
+interface IMessage {
+    newDatabase: IUser[];
+}
+
+export { IUser, IError, IValidationResult, IMessage };

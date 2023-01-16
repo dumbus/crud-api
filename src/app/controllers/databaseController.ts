@@ -1,38 +1,42 @@
 import { v4 } from 'uuid';
 import { IUser } from '../utils/types';
 
-export const database = [];
-
 const databaseController = {
+    database: [],
+
     getAllUsers(): IUser[] {
-        return database;
+        return this.database;
     },
 
     getUser(userId: string): IUser {
-        return database.find((user: IUser) => user.id === userId);
+        return this.database.find((user: IUser) => user.id === userId);
     },
 
     createUser(userProperties: IUser): IUser {
         const { username, age, hobbies } = userProperties;
         const uuid = v4();
         const newUser = { id: uuid, username, age, hobbies };
-        database.push(newUser);
+        this.database.push(newUser);
 
         return newUser;
     },
 
     updateUser(userId: string, userProperties: IUser): IUser {
         const { username, age, hobbies } = userProperties;
-        const indexOfUser = database.findIndex(user => user.id === userId);
+        const indexOfUser = this.database.findIndex(user => user.id === userId);
         const updatedUser = { id: userId, username, age, hobbies };
-        database[indexOfUser] = updatedUser;
+        this.database[indexOfUser] = updatedUser;
 
         return updatedUser;
     },
 
     deleteUser(userId: string): void {
-        const indexOfUser = database.findIndex(user => user.id === userId);
-        database.splice(indexOfUser, 1);
+        const indexOfUser = this.database.findIndex(user => user.id === userId);
+        this.database.splice(indexOfUser, 1);
+    },
+
+    updateDatabase(newDatabase: IUser[]): void {
+        this.database = newDatabase;
     }
 };
 

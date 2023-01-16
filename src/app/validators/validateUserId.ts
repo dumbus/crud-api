@@ -2,10 +2,12 @@ import { ServerResponse } from 'node:http';
 import { validate as validateUuid } from 'uuid';
 
 import { StatusCodes, ErrorMessages } from '../utils/messages';
-import { database } from '../controllers/databaseController';
+import { databaseController } from '../controllers/databaseController';
 
 const validateUserId = (userId: string, res: ServerResponse) => {
     try {
+        const database = databaseController.getAllUsers();
+        
         if (!validateUuid(userId)) {
             res.writeHead(StatusCodes.badRequest, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ code: StatusCodes.badRequest, message: ErrorMessages.invalidId }));
