@@ -29,7 +29,7 @@ npm run start:prod
 ```
 Run the application in a cluster mode
 ```
-npm run start:prod
+npm run start:multi
 ```
 Run test scenarios:
 ```
