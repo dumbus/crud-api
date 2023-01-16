@@ -1,10 +1,10 @@
 import { ServerResponse } from 'node:http';
 
-import { IUserProperties } from '../utils/types';
+import { IUser } from '../utils/types';
 import { StatusCodes, ErrorMessages } from '../utils/messages';
 
-const validateBody = (body: IUserProperties, res: ServerResponse) => {
-    const { username, age, hobbies } = body;
+const validateBody = (body: IUser, res: ServerResponse) => {
+    const { username, age, hobbies, id, ...rest } = body;
 
     try {
         if (typeof username !== 'string' || typeof age !== 'number' || !Array.isArray(hobbies)) {
@@ -21,6 +21,13 @@ const validateBody = (body: IUserProperties, res: ServerResponse) => {
                 
                 return false;
             }
+        }
+
+        if (Object.keys(rest).length > 0) {
+            res.writeHead(StatusCodes.badRequest, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ code: StatusCodes.badRequest, message: ErrorMessages.invalidRequiredFields }));
+            
+            return false;
         }
 
         return true;

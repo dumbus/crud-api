@@ -13,16 +13,18 @@ const databaseController = {
     },
 
     createUser(userProperties: IUserProperties): IUser {
+        const { username, age, hobbies } = userProperties;
         const uuid = v4();
-        const newUser = { id: uuid, ...userProperties };
+        const newUser = { id: uuid, username, age, hobbies };
         database.push(newUser);
 
         return newUser;
     },
 
     updateUser(userId: string, userProperties: IUserProperties): IUser {
+        const { username, age, hobbies } = userProperties;
         const indexOfUser = database.findIndex(user => user.id === userId);
-        const updatedUser = { id: userId, ...userProperties };
+        const updatedUser = { id: userId, username, age, hobbies };
         database[indexOfUser] = updatedUser;
 
         return updatedUser;

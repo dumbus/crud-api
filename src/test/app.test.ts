@@ -6,7 +6,7 @@ import { IUser } from '../app/utils/types';
 
 const baseUrl = '/api/users';
 
-describe('First test scenario', () => {
+describe('First test scenario: default operations', () => {
     const mockUser: IUser = {
         username: 'mockUser',
         age: 0,
@@ -58,9 +58,65 @@ describe('First test scenario', () => {
     it('GET: get deleted user (expected answer is that there is no such object)', async () => {
         const serverResponse = await supertest(server).get(`${baseUrl}/${mockUser.id}`);
 
-        console.log(serverResponse);
-
         expect(serverResponse.statusCode).toEqual(404);
         expect(serverResponse.body.message).toEqual(ErrorMessages.notFound);
+    });
+
+    describe('Second test scenario: unexpected user formats', () => {
+        const mockUserWithWrongHobbiesFormat = {
+            username: 'mockUser',
+            age: 0,
+            hobbies: [1234]
+        };
+
+        const mockUserWithWrongAgeFormat = {
+            username: 'mockUser',
+            age: '',
+            hobbies: ['hobbie']
+        };
+
+        const mockUserWithAdditionalFields = {
+            username: 'mockUser',
+            age: '',
+            hobbies: ['hobbie'],
+            additional: 'additional'
+        };
+
+        const mockUserEmpty = { };
+
+        it('POST: try to add user with wrong HOBBIES format (expected wrong body format error)', async () => {
+            const serverResponse = await supertest(server).post(baseUrl).send(mockUserWithWrongHobbiesFormat);
+
+            expect(serverResponse.statusCode).toEqual(400);
+            expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
+        });
+
+        it('POST: try to add user with wrong AGE format (expected wrong body format error)', async () => {
+            const serverResponse = await supertest(server).post(baseUrl).send(mockUserWithWrongAgeFormat);
+
+            expect(serverResponse.statusCode).toEqual(400);
+            expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
+        });
+
+        it('POST: try to add user with ADDITIONAL FIELDS (expected wrong body format error)', async () => {
+            const serverResponse = await supertest(server).post(baseUrl).send(mockUserWithAdditionalFields);
+
+            expect(serverResponse.statusCode).toEqual(400);
+            expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
+        });
+
+        it('POST: try to add an EMPTY user (expected wrong body format error)', async () => {
+            const serverResponse = await supertest(server).post(baseUrl).send(mockUserEmpty);
+
+            expect(serverResponse.statusCode).toEqual(400);
+            expect(serverResponse.body.message).toEqual(ErrorMessages.invalidRequiredFields);
+        });
+
+        it('GET: get all users (an empty array is expected)', async () => {
+            const serverResponse = await supertest(server).get(baseUrl);
+    
+            expect(serverResponse.statusCode).toEqual(200);
+            expect(serverResponse.body).toEqual([]);
+        });
     });
 });
