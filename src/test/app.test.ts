@@ -61,6 +61,6 @@ describe('First test scenario', () => {
         console.log(serverResponse);
 
         expect(serverResponse.statusCode).toEqual(404);
-        expect(serverResponse.body).toEqual(ErrorMessages.notFound);
+        expect(serverResponse.body.message).toEqual(ErrorMessages.notFound);
     });
 });

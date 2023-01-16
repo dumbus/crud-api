@@ -15,7 +15,7 @@ const apiController = {
             res.end(JSON.stringify(allUsers));
         } catch {
             res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });
-            res.end(ErrorMessages.internalServerError);
+            res.end(JSON.stringify({ code: StatusCodes.internalServerError, message: ErrorMessages.internalServerError }));
         }
     },
 
@@ -31,7 +31,7 @@ const apiController = {
             }
         } catch {
             res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });
-            res.end(ErrorMessages.internalServerError);
+            res.end(JSON.stringify({ code: StatusCodes.internalServerError, message: ErrorMessages.internalServerError }));
         }
     },
 
@@ -49,7 +49,7 @@ const apiController = {
             }
         } catch {
             res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });
-            res.end(ErrorMessages.internalServerError);
+            res.end(JSON.stringify({ code: StatusCodes.internalServerError, message: ErrorMessages.internalServerError }));
         }
     },
 
@@ -71,7 +71,7 @@ const apiController = {
             }
         } catch {
             res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });
-            res.end(ErrorMessages.internalServerError);
+            res.end(JSON.stringify({ code: StatusCodes.internalServerError, message: ErrorMessages.internalServerError }));
         }
     },
 
@@ -87,7 +87,7 @@ const apiController = {
             }
         } catch {
             res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });
-            res.end(ErrorMessages.internalServerError);
+            res.end(JSON.stringify({ code: StatusCodes.internalServerError, message: ErrorMessages.internalServerError }));
         }
     }
 }

@@ -9,7 +9,7 @@ const validateBody = (body: IUserProperties, res: ServerResponse) => {
     try {
         if (typeof username !== 'string' || typeof age !== 'number' || !Array.isArray(hobbies)) {
             res.writeHead(StatusCodes.badRequest, { 'Content-Type': 'application/json' });
-            res.end(ErrorMessages.invalidRequiredFields);
+            res.end(JSON.stringify({ code: StatusCodes.badRequest, message: ErrorMessages.invalidRequiredFields }));
             
             return false;
         }
@@ -17,7 +17,7 @@ const validateBody = (body: IUserProperties, res: ServerResponse) => {
         if (hobbies.length > 0) {
             if (hobbies.find(hobbie => typeof hobbie !== 'string')) {
                 res.writeHead(StatusCodes.badRequest, { 'Content-Type': 'application/json' });
-                res.end(ErrorMessages.invalidRequiredFields);
+                res.end(JSON.stringify({ code: StatusCodes.badRequest, message: ErrorMessages.invalidRequiredFields }));
                 
                 return false;
             }
@@ -26,7 +26,7 @@ const validateBody = (body: IUserProperties, res: ServerResponse) => {
         return true;
     } catch {
         res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });
-        res.end(ErrorMessages.internalServerError);
+        res.end(JSON.stringify({ code: StatusCodes.internalServerError, message: ErrorMessages.internalServerError }));
 
         return false;
     }

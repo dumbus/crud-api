@@ -23,14 +23,14 @@ const requestListener = (req: IncomingMessage, res: ServerResponse) => {
                     apiController.postOperation(req, res);
                 } else {
                     res.writeHead(StatusCodes.notFound, { 'Content-Type': 'application/json' });
-                    res.end(ErrorMessages.invalidRequest);
+                    res.end(JSON.stringify({ code: StatusCodes.notFound, message: ErrorMessages.invalidRequest }));
                 }
                 break;
 
             case('PUT'):
                 if (!id) {
                     res.writeHead(StatusCodes.notFound, { 'Content-Type': 'application/json' });
-                    res.end(ErrorMessages.invalidRequest);
+                    res.end(JSON.stringify({ code: StatusCodes.notFound, message: ErrorMessages.invalidRequest }));
                 } else {
                     apiController.putOperation(id, req, res);
                 }
@@ -39,7 +39,7 @@ const requestListener = (req: IncomingMessage, res: ServerResponse) => {
             case('DELETE'):
                 if (!id) {
                     res.writeHead(StatusCodes.notFound, { 'Content-Type': 'application/json' });
-                    res.end(ErrorMessages.invalidRequest);
+                    res.end(JSON.stringify({ code: StatusCodes.notFound, message: ErrorMessages.invalidRequest }));
                 } else {
                     apiController.deleteOperation(id, res);
                 }
@@ -47,11 +47,11 @@ const requestListener = (req: IncomingMessage, res: ServerResponse) => {
             }
         } else {
             res.writeHead(StatusCodes.notFound, { 'Content-Type': 'application/json' });
-            res.end(ErrorMessages.invalidRequest);
+            res.end(JSON.stringify({ code: StatusCodes.notFound, message: ErrorMessages.invalidRequest }));
         }
     } catch {
         res.writeHead(StatusCodes.internalServerError, { 'Content-Type': 'application/json' });
-        res.end(ErrorMessages.internalServerError);
+        res.end(JSON.stringify({ code: StatusCodes.internalServerError, message: ErrorMessages.internalServerError }));
     }
 };
 

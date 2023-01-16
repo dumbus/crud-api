@@ -17,7 +17,7 @@ const getBody = (req: IncomingMessage, res: ServerResponse): Promise<IUserProper
                 resolve(parsedBody);
             } catch {
                 res.writeHead(StatusCodes.badRequest, { 'Content-Type': 'application/json' });
-                res.end(ErrorMessages.invalidBody);
+                res.end(JSON.stringify({ code: StatusCodes.badRequest, message: ErrorMessages.invalidBody }));
             }
         });
     });
