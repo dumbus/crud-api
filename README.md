@@ -57,8 +57,8 @@ Implemented endpoint: `api/users`
 ```
 Worker ${worker pid} is running on port ${worker port}  
 ```
-
 > Also in cluster mode you can see, how load-balancer works:
 ```
 Request was sent from load-balancer to worker ${worker pid}, port: ${worker port} 
 ```
+> **jest**, **ts-jest**, **supertest** are libraries for testing, it is allowed to use them
