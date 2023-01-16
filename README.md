@@ -18,6 +18,7 @@ npm install
 ```
 
 ## How to run application:
+
 Run in a development mode:
 ```
 npm run start:dev
@@ -32,15 +33,17 @@ npm run test
 ```
 
 ## API implementation:
+
 Implemented endpoint: `api/users`
 
-`GET api/users` - get all users
-`GET api/users/${userId}` - get one user by id
-`POST api/users is used` - create record about new user and store it in database
-`PUT api/users/{userId}` - to update existing user
-`DELETE api/users/{userId}` - to delete existing user from database
+`GET api/users` - get all users  
+`GET api/users/${userId}` - get one user by id  
+`POST api/users is used` - create record about new user and store it in database  
+`PUT api/users/{userId}` - to update existing user  
+`DELETE api/users/{userId}` - to delete existing user from database  
 
 ## User fields:
-`username` — user's name (string, **required**)
-`age` — user's age (number, **required**)
-`hobbies` — user's hobbies (array of strings or empty array, **required**)
+
+`username` — user's name (string, **required**)  
+`age` — user's age (number, **required**)  
+`hobbies` — user's hobbies (array of strings or empty array, **required**)  
