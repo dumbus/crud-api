@@ -23,6 +23,8 @@ const startServer = () => {
         
         if (cluster.isPrimary) {
             console.log(`Primary ${process.pid} is running on port ${port}`);
+            console.log(`Please, wait for workers to start, you will see ${cpuCount} messages`);
+            console.log('Format of messages will be: Worker ${worker pid} is running on port ${worker port}');
 
             const primaryServer = createServer((primaryRequest: IncomingMessage, primaryResponse: ServerResponse) => {
                 const requestOptions = {
