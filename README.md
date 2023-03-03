@@ -1,22 +1,21 @@
-# Simple CRUD API
+## Simple CRUD API
 
-Assignment: https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md
+A simple NodeJS CRUD API.
+
+[Assignment](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/assignment.md)  
+[Scoring](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/crud-api/score.md)
 
 ## How to download and install application:
 
 ### 1. Clone repository:
 ```
-git clone ${link to repository}
+git clone https://github.com/dumbus/crud-api.git
 ```
 ### 2. Change active directory:
 ```
 cd crud-api
 ```
-### 3. Change repository branch:
-```
-git checkout crud-api
-```
-### 4. Install dependencies:
+### 3. Install dependencies:
 ```
 npm install
 ```
